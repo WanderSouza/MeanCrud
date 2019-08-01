@@ -1,0 +1,68 @@
+<div class="row justify-content-center">
+  <!-- Form register -->
+  <div class="col-md-4 register-employee">
+    <div class="card-body">
+
+      <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()">
+
+        <!-- Name field -->
+        <div class="form-group">
+          <label for="inputName">Nome</label>
+          <input class="form-control" type="text" formControlName="name">
+          <!-- error -->
+          <div class="invalid-feedback" *ngIf="submitted && myForm.name.errors?.required">
+            Nome é obrigatório.
+          </div>
+        </div>
+
+        <!-- E-mail field -->
+        <div class="form-group">
+          <label for="inputEmail3">E-mail</label>
+          <input class="form-control" type="text" formControlName="email">
+          <!-- error -->
+          <div class="invalid-feedback" *ngIf="submitted && myForm.email.errors?.required">
+            E-mail é obrigatório.
+          </div>
+          <div class="invalid-feedback" *ngIf="submitted && myForm.email.errors?.pattern">
+            Digite um e-mail válido.
+          </div>
+        </div>
+
+        <!-- Employee profile field -->
+        <div class="form-group">
+          <label for="inputPassword3">Função</label>
+          <select class="custom-select form-control" (change)="updateProfile($event.target.value)"
+            formControlName="designation">
+            <option value="">Escolha...</option>
+            <option *ngFor="let employeeProfile of EmployeeProfile" value="{{employeeProfile}}">{{employeeProfile}}
+            </option>
+          </select>
+          <!-- error -->
+          <div class="invalid-feedback" *ngIf="submitted && myForm.designation.errors?.required">
+            Selecione uma função.
+          </div>
+        </div>
+
+        <!-- Mobile phone field -->
+        <div class="form-group">
+          <label for="inputVerify3">Celular</label>
+          <input class="form-control" type="text" formControlName="phoneNumber">
+          <!-- error -->
+          <div class="invalid-feedback" *ngIf="submitted && myForm.phoneNumber.errors?.required">
+            Digite o número do celular.
+          </div>
+          <div class="invalid-feedback" *ngIf="submitted && myForm.phoneNumber.errors?.pattern">
+            Esse campo só aceita números.
+          </div>
+        </div>
+
+        <div class="form-group">
+          <button class="btn btn-success btn-lg btn-block" type="submit">Cadastrar</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+  <!-- End form register -->
+
+</div>
